@@ -1,0 +1,16 @@
+{
+    "alias": "wrdp",
+    "authors": [
+        "Gabriel Auger"
+    ],
+    "deps": [],
+    "description": "",
+    "filen_main": "main.py",
+    "installer": "gpm",
+    "licenses": [
+        "MIT"
+    ],
+    "name": "xfreerdp wrapper",
+    "uuid4": "1d458ff9-d23f-48a2-acb9-87b8696951ee",
+    "version": "0.1.0"
+}
