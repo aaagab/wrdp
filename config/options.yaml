@@ -1,0 +1,63 @@
+args:
+  _examples: |
+    rdppass; wrdp --location officeda --pass-env
+    rdppass; wrdp --location home --pass-env
+    rdppass; wrdp --location home --pass-env --displays 1 0
+    wrdp --location home
+    rdppass; wrdp --location home
+    rdppass; wrdp --location home --monitor 2 --taskbar --pass-env
+    rdppass; wrdp --location home --monitor 2 --taskbar --pass-env --audio
+    systemctl start xrdp
+    rdppass; wrdp --location test --pass-env --to-cmd --monitor --size 960x1032 --position 2326x0
+    rdppass; ./main.py --location test --pass-env --to-cmd --monitor 2 --size 460x1080 --position 2826x0 --taskbar
+    rdppass; ./main.py --location test --pass-env --to-cmd --monitor 2 --size 660x1080 --position 2626x0 --taskbar
+    rdppass; ./main.py --location test --pass-env --to-cmd --monitor 2 --size 960x1080 --position 2326x0 --taskbar
+  conf:
+  _xor: monitor,monitors,window
+  location:
+    _label: LOCATION_NAME
+    _values: '*'
+    _required: true
+  audio:
+    _info: set audio on client
+
+  low_res:
+    _info: low resolution settings "/rfx /gfx:avc444"
+
+  monitor:
+    _info: monitor index as defined with --set-monitors
+    _type: int
+
+    decorations:
+      _label: GAP
+      _type: int
+      _values: "?"
+
+    no_taskbar:
+
+  monitors:
+    _info: provide any monitor index, 1st monitor is the main one.
+    _type: int
+    _values: +
+
+  pass_env:
+    to_cmd:
+      show:
+  pass_fifo:
+    _label: PATH
+  scale:
+    _info: apply parameters /scale:140 /scale-desktop:160 for tablet
+
+  set_monitors:
+    _allow_siblings: true
+
+  window:
+    decorations:
+    x:
+      _type: int
+    y:
+      _type: int
+    width:
+      _type: int
+    height:
+      _type: int

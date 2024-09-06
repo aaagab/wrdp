@@ -1,0 +1,46 @@
+#!/usr/bin/expect -f
+
+set cmd [lindex $argv 0]
+set filenpa_fifo [lindex $argv 1]
+set is_pass_env [lindex $argv 2]
+set pass_to_cmd [lindex $argv 3]
+set show_cmd [lindex $argv 4]
+
+if { $is_pass_env == "True" } {
+    global env
+    if {[catch {set password $env(rdppass)} err] } {
+        puts stderr "There is no rdppass set in ENV\nError: $err"
+        exit 1
+    }
+} 
+
+if { $filenpa_fifo != "None" } {
+    set password [exec cat $filenpa_fifo]
+} 
+
+if { $pass_to_cmd == "True" } {
+    append cmd " /p:" $password
+}
+
+if { $show_cmd == "False" } {
+    log_user 0
+}
+eval spawn $cmd
+if { $show_cmd == "False" } {
+    log_user 1
+}
+
+if { [info exists password] == 1 && $pass_to_cmd == "False" } {
+    expect {
+        "Do you trust the above certificate? (Y/T/N)" {
+            send -- "Y\r";
+            exp_continue
+        }
+        "Password:" {
+            send -- "$password\r"
+        }
+    }
+}
+
+interact
+expect eof
