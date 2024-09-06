@@ -1,17 +1,14 @@
 args:
   _examples: |
-    rdppass; wrdp --location officeda --pass-env
-    rdppass; wrdp --location home --pass-env
-    rdppass; wrdp --location home --pass-env --displays 1 0
+    rdppass
+    wrdp --location officeda --pass-env
+    wrdp --location home --pass-env --low-res
+    wrdp --location home --pass-env --monitors 1 2
     wrdp --location home
-    rdppass; wrdp --location home
-    rdppass; wrdp --location home --monitor 2 --taskbar --pass-env
-    rdppass; wrdp --location home --monitor 2 --taskbar --pass-env --audio
-    systemctl start xrdp
-    rdppass; wrdp --location test --pass-env --to-cmd --monitor --size 960x1032 --position 2326x0
-    rdppass; ./main.py --location test --pass-env --to-cmd --monitor 2 --size 460x1080 --position 2826x0 --taskbar
-    rdppass; ./main.py --location test --pass-env --to-cmd --monitor 2 --size 660x1080 --position 2626x0 --taskbar
-    rdppass; ./main.py --location test --pass-env --to-cmd --monitor 2 --size 960x1080 --position 2326x0 --taskbar
+    wrdp --location home
+    wrdp --location home --monitor 2 --taskbar --pass-env
+    wrdp --location home --monitor 2 --taskbar --pass-env --audio
+    wrdp --location test --pass-env --to-cmd --window -w 960 -h 1032 -x 2326  -y 0 -d
   conf:
   _xor: monitor,monitors,window
   location:
@@ -29,11 +26,13 @@ args:
     _type: int
 
     decorations:
+      _aliases: --decorations,-d
       _label: GAP
       _type: int
       _values: "?"
 
-    no_taskbar:
+    taskbar:
+      _info: keep taskbar visible
 
   monitors:
     _info: provide any monitor index, 1st monitor is the main one.
@@ -42,6 +41,7 @@ args:
 
   pass_env:
     to_cmd:
+      _info: password is added to xfreerdp cmd so it is visible with ps
       show:
   pass_fifo:
     _label: PATH
@@ -53,11 +53,14 @@ args:
 
   window:
     decorations:
+      _aliases: --decorations,-d
     x:
       _type: int
     y:
       _type: int
     width:
+      _aliases: --width,-w
       _type: int
     height:
+      _aliases: --height,-h
       _type: int

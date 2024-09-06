@@ -135,7 +135,7 @@ if __name__ == "__main__":
             height=monitor.height
             width=monitor.width
 
-            if args.monitor.no_taskbar._here:
+            if args.monitor.taskbar._here:
                 x=monitor.tb_x
                 y=monitor.tb_y
                 height=monitor.tb_height
