@@ -144,6 +144,7 @@ def wrdp(
     if mouse_coords is not None:
         mouse=Mouse()
         mouse.set_coords(mouse_coords.x, mouse_coords.y)
+
     cmd=[
         filenpa_exp,
         " ".join(cmd),

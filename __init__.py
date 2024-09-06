@@ -2,7 +2,7 @@
 # authors: Gabriel Auger
 # name: xfreerdp wrapper
 # licenses: MIT 
-__version__= "1.0.0"
+__version__= "1.0.1"
 
 from .dev.wrdp import wrdp, MouseCoords, Location
 from .gpkgs.prompt import prompt_multiple
