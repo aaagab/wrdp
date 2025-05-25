@@ -9,4 +9,5 @@ gpkgs/
 /todo.txt
 nargs-cache.json
 nargs-cache.pickle
+.directory
 
